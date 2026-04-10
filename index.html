@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1f5c">
+  <meta name="description" content="UCC IT Department – Faculty directory, courses, admissions, social media and more.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="UCC IT">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>UCC IT Department</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- OFFLINE BANNER -->
+<div id="offline-banner">&#9888; You are offline — some features may be unavailable</div>
+
+<!-- TOP APP BAR -->
+<header class="app-bar">
+  <div class="app-bar-logo">
+    <div class="app-bar-emblem">UCC</div>
+    <div>
+      <div class="app-bar-title">IT Department</div>
+      <div class="app-bar-sub">University of the Commonwealth Caribbean</div>
+    </div>
+  </div>
+  <button class="install-btn" id="installBtn" onclick="installApp()">Install App</button>
+</header>
+
+
+<!-- ════════════════════════════════════
+     VIEW: HOME
+════════════════════════════════════ -->
+<main class="view active" id="view-home">
+  <div class="home-hero">
+    <div class="hero-eyebrow">Welcome to</div>
+    <h1 class="hero-title">UCC <em>Information</em><br>Technology</h1>
+    <p class="hero-sub">Your academic hub for faculty, courses, admissions and campus resources.</p>
+    <div class="hero-badge">&#127891; Spring Semester 2026 &nbsp;&middot;&nbsp; Online Centre</div>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card featured" onclick="navigate('directory')">
+      <div class="mc-icon" style="background:rgba(255,255,255,0.12)">&#128101;</div>
+      <div>
+        <div class="mc-title" style="color:#fff">Faculty &amp; Staff Directory</div>
+        <div class="mc-desc"  style="color:rgba(255,255,255,0.6)">Contact info for all department staff</div>
+      </div>
+    </div>
+    <div class="menu-card" onclick="navigate('courses')">
+      <div class="mc-icon">&#128218;</div>
+      <div class="mc-title">Courses</div>
+      <div class="mc-desc">Browse IT department offerings</div>
+    </div>
+    <div class="menu-card" onclick="navigate('admissions')">
+      <div class="mc-icon">&#128203;</div>
+      <div class="mc-title">Admissions</div>
+      <div class="mc-desc">Requirements &amp; how to apply</div>
+    </div>
+    <div class="menu-card" onclick="navigate('social')">
+      <div class="mc-icon">&#128241;</div>
+      <div class="mc-title">Social Media</div>
+      <div class="mc-desc">Follow UCC online</div>
+    </div>
+    <div class="menu-card" onclick="openEmailFab()">
+      <div class="mc-icon" style="background:rgba(26,79,214,0.1)">&#9993;</div>
+      <div class="mc-title">Email HOD</div>
+      <div class="mc-desc">Message the Head of Department</div>
+    </div>
+  </div>
+</main>
+
+
+<!-- ════════════════════════════════════
+     VIEW: FACULTY / STAFF DIRECTORY
+════════════════════════════════════ -->
+<section class="view" id="view-directory">
+  <div class="page-header">
+    <div class="badge">B.Sc. Information Technology</div>
+    <h1>Faculty &amp; Staff</h1>
+    <p>University of the Commonwealth Caribbean</p>
+  </div>
+  <div class="container">
+    <div class="search-wrap">
+      <input class="search-input" type="search" id="staffSearch"
+             placeholder="Search by name or role&#8230;" oninput="filterStaff()">
+    </div>
+    <div id="staffList"></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     VIEW: COURSES
+     Course cards are injected here by
+     app.js which fetches courses.php
+════════════════════════════════════ -->
+<section class="view" id="view-courses">
+  <div class="page-header">
+    <div class="badge">B.Sc. Information Technology</div>
+    <h1>Course Offerings</h1>
+    <p>University of the Commonwealth Caribbean</p>
+  </div>
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="courseSearch" placeholder="Search by course name or code&#8230;">
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-year="all">All Years</button>
+      <button class="filter-btn" data-year="1">Year 1</button>
+      <button class="filter-btn" data-year="2">Year 2</button>
+      <button class="filter-btn" data-year="3">Year 3</button>
+      <button class="filter-btn" data-year="4">Year 4</button>
+    </div>
+    <!-- Courses rendered here by app.js -->
+    <div id="courseList">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading courses&#8230;</p>
+      </div>
+    </div>
+    <p id="no-results" style="display:none;">No courses match your search.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     VIEW: ADMISSIONS
+════════════════════════════════════ -->
+<section class="view" id="view-admissions">
+  <div class="page-header">
+    <div class="badge">B.Sc. Information Technology</div>
+    <h1>Admissions</h1>
+    <p>University of the Commonwealth Caribbean</p>
+  </div>
+  <div class="container">
+
+    <div class="section">
+      <h2>Programme Overview</h2>
+      <p>The Bachelor of Science in Information Technology is a four-year programme worth 124 credits. It is available via Blended and 100% Online delivery through UCC Global. The next start date is <strong>May (Summer) 2026</strong>.</p>
+      <p>The programme produces graduates with technical, business, and interpersonal skills to make meaningful contributions to the IT industry nationally, regionally, and globally.</p>
+    </div>
+
+    <div class="section">
+      <h2>Duration</h2>
+      <p>UCC Bachelor of Science degree programmes are four-year programmes. This may be reduced by up to two years if a student gains Advanced Standing with an appropriate Associate of Science degree or equivalent qualification.</p>
+    </div>
+
+    <div class="section">
+      <h2>Entry Requirements &mdash; Jamaican Students</h2>
+      <ul>
+        <li>Minimum of five (5) subjects at GCE or CSEC level including <strong>English Language</strong> and <strong>Mathematics</strong> at grades A, B, C or 1, 2, 3 respectively. A CSEC Grade 3 must have been obtained since 1998.</li>
+        <li>Candidates with four (4) CXCs may apply pending outstanding subjects or may opt to complete UCC replacement courses: Core Mathematics, English for Academic Purposes, and Fundamentals of Accounting.</li>
+        <li>Applicants may apply under the <strong>Mature Entry option</strong> &mdash; must be at least 25 years old with a minimum of five (5) years of work experience. Academic qualifications, r&eacute;sum&eacute;, job letter, and three professional references are required.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Entry Requirements &mdash; International Students</h2>
+      <ul>
+        <li>Application fee (non-refundable) of <strong>US$100</strong></li>
+        <li>Completed Application for Admission</li>
+        <li>High school diploma, GED, or Certificate of Equivalency/Proficiency with a minimum GPA of 2.5</li>
+        <li>Passes in 5 GCE O Level subjects at A, B, or C including <strong>Mathematics</strong> and <strong>English</strong>, or International Baccalaureate (IB) or equivalent qualification</li>
+        <li>One electronic passport size photo</li>
+        <li>Copy of passport information page</li>
+        <li>Financial documentation demonstrating ability to support yourself during your stay in Jamaica (with completed UCC Affidavit of Support Form)</li>
+        <li>Official transcripts of all secondary school and university coursework (translated in English), evaluated by one of the following:
+          <ul class="sub-list">
+            <li><a href="http://www.acei1.com" target="_blank" rel="noopener">www.acei1.com</a></li>
+            <li><a href="http://www.ierf.org"  target="_blank" rel="noopener">www.ierf.org</a></li>
+            <li><a href="http://www.wes.org"   target="_blank" rel="noopener">www.wes.org</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section honours">
+      <h2>Honours Programme</h2>
+      <p>Students with <strong>eight (8) CXC/GCE subjects</strong> including Mathematics and English Language at <strong>Grade 1</strong> may qualify for a <strong>25% tuition waiver</strong> during the first year.</p>
+    </div>
+
+    <div class="apply-section">
+      <h2>Ready to Apply?</h2>
+      <p>Visit the UCC official application page to begin your application.</p>
+      <a class="apply-btn" href="https://www.ucc.edu.jm/apply/undergraduate/preform"
+         target="_blank" rel="noopener">Apply Now</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     VIEW: SOCIAL MEDIA
+════════════════════════════════════ -->
+<section class="view" id="view-social">
+  <div class="page-header">
+    <div class="badge">Stay Connected</div>
+    <h1>Social Media</h1>
+    <p>University of the Commonwealth Caribbean</p>
+  </div>
+  <div class="container">
+
+    <div class="social-tabs">
+      <button class="social-tab active" onclick="switchSocial('fb', this)">&#128248; Facebook</button>
+      <button class="social-tab"        onclick="switchSocial('tw', this)">&#128038; Twitter / X</button>
+      <button class="social-tab"        onclick="switchSocial('ig', this)">&#128247; Instagram</button>
+    </div>
+
+    <!-- Facebook -->
+    <div class="social-frame-wrap active" id="sf-fb">
+      <div class="social-placeholder">
+        <div class="sp-icon">&#128248;</div>
+        <h4>UCC on Facebook</h4>
+        <p>Follow UCC&#39;s official Facebook page for the latest news, events, and campus updates.</p>
+        <a href="https://www.facebook.com/UCCJamaica" target="_blank" rel="noopener"
+           class="social-ext-btn fb-btn">Open UCC Facebook &#8599;</a>
+        <div class="social-embed-wrap">
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FUCCJamaica&tabs=timeline&width=340&height=380&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true"
+            width="340" height="380" scrolling="no" frameborder="0"
+            style="border:none;overflow:hidden;width:100%;display:block"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Twitter / X -->
+    <div class="social-frame-wrap" id="sf-tw">
+      <div class="social-placeholder">
+        <div class="sp-icon">&#128038;</div>
+        <h4>UCC on Twitter / X</h4>
+        <p>Follow UCC on Twitter/X for announcements, academic news and student life highlights.</p>
+        <a href="https://twitter.com/UCCJamaica" target="_blank" rel="noopener"
+           class="social-ext-btn tw-btn">Open UCC Twitter &#8599;</a>
+        <div class="social-embed-wrap">
+          <a class="twitter-timeline" data-height="360"
+             href="https://twitter.com/UCCJamaica">Tweets by UCCJamaica</a>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="social-frame-wrap" id="sf-ig">
+      <div class="social-placeholder">
+        <div class="sp-icon">&#128247;</div>
+        <h4>UCC on Instagram</h4>
+        <p>See campus life, events, student achievements and more on UCC&#39;s official Instagram page.</p>
+        <a href="https://www.instagram.com/uccjamaica" target="_blank" rel="noopener"
+           class="social-ext-btn ig-btn">Open UCC Instagram &#8599;</a>
+        <p class="social-note">Instagram does not permit direct embedding. Tap the button above to view in your browser.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FAB + EMAIL MODAL (from fab.php) -->
+<?php include 'fab.php'; ?>
+
+<!-- TOAST -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-item active" id="nav-home"       onclick="navigate('home')"       role="button" tabindex="0" aria-label="Home">
+    <span class="nav-icon" aria-hidden="true">&#127968;</span>
+    <span class="nav-label">Home</span>
+  </div>
+  <div class="nav-item" id="nav-directory"  onclick="navigate('directory')"  role="button" tabindex="0" aria-label="Directory">
+    <span class="nav-icon" aria-hidden="true">&#128101;</span>
+    <span class="nav-label">Directory</span>
+  </div>
+  <div class="nav-item" id="nav-courses"    onclick="navigate('courses')"    role="button" tabindex="0" aria-label="Courses">
+    <span class="nav-icon" aria-hidden="true">&#128218;</span>
+    <span class="nav-label">Courses</span>
+  </div>
+  <div class="nav-item" id="nav-admissions" onclick="navigate('admissions')" role="button" tabindex="0" aria-label="Admissions">
+    <span class="nav-icon" aria-hidden="true">&#128203;</span>
+    <span class="nav-label">Admissions</span>
+  </div>
+  <div class="nav-item" id="nav-social"     onclick="navigate('social')"     role="button" tabindex="0" aria-label="Social Media">
+    <span class="nav-icon" aria-hidden="true">&#128241;</span>
+    <span class="nav-label">Social</span>
+  </div>
+</nav>
+
+<script src="app.js"></script>
+
+</body>
+</html>
