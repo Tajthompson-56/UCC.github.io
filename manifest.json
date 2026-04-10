@@ -1,0 +1,68 @@
+{
+  "name": "UCC IT Department",
+  "short_name": "UCC IT",
+  "description": "University of the Commonwealth Caribbean — IT Department. Faculty directory, courses, admissions, social media and email.",
+  "start_url": "/index.php",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d1f5c",
+  "theme_color": "#0d1f5c",
+  "lang": "en-JM",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Faculty Directory",
+      "short_name": "Directory",
+      "url": "/index.php#directory",
+      "description": "View faculty and staff contact information",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Course Offerings",
+      "short_name": "Courses",
+      "url": "/index.php#courses",
+      "description": "Browse IT department courses",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Admissions",
+      "short_name": "Admissions",
+      "url": "/index.php#admissions",
+      "description": "Entry requirements and how to apply",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ]
+}
